@@ -8,8 +8,30 @@ Favorites addon for GetCandy 2 Application.
 composer require servnx/getcandy-favorites
 ```
 
+### Publishing Configurations & Migrations (Optional)
+
+```php
+php artisan vendor:publish --tag="getcandy-favorites"
+```
+
+### Run Migrations
+
+```php 
+php artisan migrate
+```
+
+### Adding screens to GetCandy Admin Hub (Optional)
+If you have the admin hub installed, you can enable the screens by publishing the 
+configs demonstrated above and setting the `hub` value to `true` (false by default).
+```php
+/*
+* If you have GetCandy Admin Hub installed set this to true (default is false).
+*/
+'hub' => true,
+```
+
 ### The Favoriter
-The *"favoriter"* is the *"user"* in which is favoriting objects.
+The **favoriter** is the **user** in which is favoriting objects.
 
 Add the **Favoriter Trait** to your desired User model.
 ```php
@@ -25,22 +47,6 @@ class User extends Authenticatable
        
     ...
 }
-```
-
-### Publishing Configurations & Migrations
-
-```php
-php artisan vendor:publish --tag="getcandy-favorites"
-```
-
-## Adding screens to GetCandy Admin Hub
-If you have the admin hub installed, you can enable the screens by publishing the 
-configs demonstrated above and setting the `hub` value to `true` (false by default).
-```php
-/*
-* If you have GetCandy Admin Hub installed set this to true (default is false).
-*/
-'hub' => true,
 ```
 
 ## Usage
