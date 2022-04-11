@@ -1,0 +1,35 @@
+{
+    "name": "servnx/getcandy-favorites",
+    "description": "Favorites Addon for GetCandy 2",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Poppabear",
+            "email": "servnx@gmail.com"
+        }
+    ],
+    "require": {
+        "getcandy/admin": "^2.0-beta"
+    },
+    "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
+        "psr-4": {
+            "Servnx\\GetCandyFavorite\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Servnx\\GetCandyFavorite\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Servnx\\GetCandyFavorite\\GetCandyFavoritesServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev"
+}
