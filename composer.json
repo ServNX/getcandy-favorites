@@ -11,6 +11,10 @@
     "require": {
         "getcandy/admin": "^2.0-beta"
     },
+    "require-dev": {
+        "orchestra/testbench": "^6.0|^7.0",
+        "phpunit/phpunit": "^9.5"
+    },
     "autoload": {
         "files": [
             "src/helpers.php"
