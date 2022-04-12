@@ -2,21 +2,42 @@
 
 namespace Servnx\GetCandyFavorite\Tests;
 
+use Cartalyst\Converter\Laravel\ConverterServiceProvider;
+use GetCandy\FieldTypes\TranslatedText;
+use GetCandy\GetCandyServiceProvider;
+use GetCandy\Models\Product;
+use GetCandy\Models\ProductType;
+use Illuminate\Support\Facades\Event;
+use Kalnoy\Nestedset\NestedSetServiceProvider;
 use Livewire\LivewireServiceProvider;
 use Servnx\GetCandyFavorite\GetCandyFavoritesServiceProvider;
+use Servnx\GetCandyFavorite\Tests\Stubs\User;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
+    private $productType;
+
     public function setUp(): void
     {
         parent::setUp();
+
+        Event::fake();
+
+        config(['auth.providers.users.model' => User::class]);
+
+        $this->productType = ProductType::create([
+            'name' => 'Test Product Type',
+        ]);
     }
 
     protected function getPackageProviders($app)
     {
         return [
+            GetCandyServiceProvider::class,
             GetCandyFavoritesServiceProvider::class,
             LivewireServiceProvider::class,
+            ConverterServiceProvider::class,
+            NestedSetServiceProvider::class,
         ];
     }
 
@@ -32,6 +53,32 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function getEnvironmentSetUp($app)
     {
-        // perform environment setup
+        //
+    }
+
+    protected function CreateUser($name = 'test', $email = 'test@gmail.com')
+    {
+        return User::create([
+            'name'     => $name,
+            'email'    => $email,
+            'password' => 'test123'
+        ]);
+    }
+
+    protected function CreateProduct($name = 'Test Product')
+    {
+        return Product::create([
+                'product_type_id' => $this->productType->id,
+                'status'          => 'published',
+                'brand'           => 'KARVEC',
+                'attribute_data'  => [
+                    'name'        => new TranslatedText([
+                        'en' => $name
+                    ]),
+                    'description' => new TranslatedText([
+                        'en' => 'Description'
+                    ]),
+                ]
+            ]);
     }
 }
