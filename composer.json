@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "getcandy/admin": "^2.0-beta"
+        "getcandy/core": "^2.0-beta"
     },
     "require-dev": {
         "cartalyst/converter": "^6.1|^7.0",
