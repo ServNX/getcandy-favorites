@@ -36,9 +36,11 @@ trait Favoriteable
 
     public function favoriters(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
+        $prefix = config('getcandy.database.table_prefix');
+
         return $this->belongsToMany(
             config('auth.providers.users.model'),
-            config('favorite.favorites_table'),
+            $prefix . config('favorite.favorites_table'),
             'favoriteable_id',
             config('favorite.user_foreign_key')
         )
