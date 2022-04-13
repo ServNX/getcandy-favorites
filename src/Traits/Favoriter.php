@@ -89,7 +89,7 @@ trait Favoriter
         });
 
         $favoriteables->map(function ($favoriteable) use ($favorited, $resolver) {
-            $resolver = $resolver ?? fn ($m) => $m;
+            $resolver = $resolver ?? fn($m) => $m;
             $favoriteable = $resolver($favoriteable);
 
             if ($favoriteable && in_array(Favoriteable::class, class_uses_recursive($favoriteable))) {
