@@ -109,13 +109,13 @@ $favoriteItems->find(1)->get();
 
 ```php
 // all favorites by this user
-$user->favorites()->count();
+$user->favorites->count();
 
 // how many Products has this user favorited ?
 $user->favorites()->withType(Product::class)->count();
 
 // how many users favorited this product ?
-$product->favoriters()->count();
+$product->favoriters->count();
 ```
 
 List with `*_count` attribute:

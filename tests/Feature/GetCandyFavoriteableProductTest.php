@@ -58,7 +58,7 @@ class GetCandyFavoriteableProductTest extends TestCase
         $user->favorite($post1);
         $user->favorite($post2);
 
-        $this->assertSame(4, $user->favorites()->count());
+        $this->assertSame(4, $user->favorites->count());
         $this->assertSame(2, $user->favorites()->withType(Product::class)->count());
     }
 }
