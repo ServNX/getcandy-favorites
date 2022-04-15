@@ -33,26 +33,4 @@ trait FavoriteableMixin
             return false;
         };
     }
-
-    public function favorites()
-    {
-        return function () {
-            return $this->morphMany(config('favorite.favorite_model'), 'favoriteable');
-        };
-    }
-
-    public function favoriters()
-    {
-        $prefix = config('getcandy.database.table_prefix');
-
-        return function () use ($prefix) {
-            return $this->belongsToMany(
-                config('auth.providers.users.model'),
-                $prefix . config('favorite.favorites_table'),
-                'favoriteable_id',
-                config('favorite.user_foreign_key')
-            )
-                ->where('favoriteable_type', $this->getMorphClass());
-        };
-    }
 }

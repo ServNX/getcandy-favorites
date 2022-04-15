@@ -49,6 +49,23 @@ class GetCandyFavoritesServiceProvider extends ServiceProvider
     private function registerMixins()
     {
         Product::mixin(new GetCandyFavoriteableMixins());
+
+        // Define Mixin relationships
+        Product::resolveRelationUsing('favorites', function ($model) {
+            return $model->morphMany(config('favorite.favorite_model'), 'favoriteable');
+        });
+
+        Product::resolveRelationUsing('favoriters', function ($model) {
+            $prefix = config('getcandy.database.table_prefix');
+
+            return $model->belongsToMany(
+                config('auth.providers.users.model'),
+                $prefix . config('favorite.favorites_table'),
+                'favoriteable_id',
+                config('favorite.user_foreign_key')
+            )
+                ->where('favoriteable_type', $this->getMorphClass());
+        });
     }
 
     /**
